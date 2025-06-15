@@ -9,9 +9,7 @@ from google.genai import types
 MAX_CHARS = 10000
 
 
-def get_files_info(
-    working_directory: str, directory: str | None = None
-) -> str:
+def get_files_info(working_directory: str, directory: str | None = None) -> str:
     try:
         working_abspath = os.path.abspath(working_directory)
         target_path = working_abspath
@@ -42,7 +40,6 @@ def get_files_info(
         return "\n".join(files)
     except Exception as e:
         return f"Error: {e}"
-
 
 
 schema_get_files_info = types.FunctionDeclaration(

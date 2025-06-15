@@ -10,9 +10,7 @@ from google.genai import types
 def write_file(working_directory: str, file_path: str, content: str) -> str:
     try:
         working_abspath = os.path.abspath(working_directory)
-        file_abspath = os.path.abspath(
-            os.path.join(working_abspath, file_path)
-        )
+        file_abspath = os.path.abspath(os.path.join(working_abspath, file_path))
 
         if not file_abspath.startswith(working_abspath):
             return f'Error: Cannot write to "{file_path}" as it is outside the permitted working directory'
@@ -22,7 +20,9 @@ def write_file(working_directory: str, file_path: str, content: str) -> str:
         with open(file_abspath, "w") as f:
             f.write(content)
 
-        return f'Successfully wrote to "{file_path}" ({len(content)} characters written)'
+        return (
+            f'Successfully wrote to "{file_path}" ({len(content)} characters written)'
+        )
     except Exception as e:
         return f'Error while write file "{file_path}": {e}'
 

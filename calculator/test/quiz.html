@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Database Quiz</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2d89ef; /* Metro blue */
+        }
+
+        .question {
+            margin-bottom: 20px;
+        }
+
+        .options {
+            list-style: none;
+            padding: 0;
+        }
+
+        .options li {
+            margin-bottom: 10px;
+        }
+
+        .option-button {
+            display: block;
+            padding: 10px;
+            background-color: #eee;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            text-decoration: none;
+            color: #333;
+            cursor: pointer;
+        }
+
+        .option-button:hover {
+            background-color: #ddd;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Database Quiz</h1>
+        <div id="quiz">
+            <div class="question" id="question"></div>
+            <ul class="options" id="options"></ul>
+        </div>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        const questions = [
+          {
+            question: "What is ACID in the context of databases?",
+            options: ["Atomicity, Consistency, Isolation, Durability", "Accuracy, Completeness, Integrity, Density", "Availability, Capacity, Integrity, Distribution", "All of the above"],
+            answer: "Atomicity, Consistency, Isolation, Durability"
+          },
+          {
+            question: "What is a NoSQL database?",
+            options: ["A database that does not use SQL", "A database that uses only SQL", "A relational database", "A database with a fixed schema"],
+            answer: "A database that does not use SQL"
+          },
+          {
+            question: "What is CAP theorem?",
+            options: ["Consistency, Availability, Partition Tolerance", "Capacity, Availability, Performance", "Consistency, Accuracy, Partition Tolerance", "None of the above"],
+            answer: "Consistency, Availability, Partition Tolerance"
+          },
+          {
+            question: "What is sharding?",
+            options: ["Splitting a database into smaller parts", "Creating a backup of a database", "Compressing a database", "Encrypting a database"],
+            answer: "Splitting a database into smaller parts"
+          },
+          {
+            question: "What is the purpose of an index in a database?",
+            options: ["To speed up data retrieval", "To slow down data retrieval", "To encrypt data", "To compress data"],
+            answer: "To speed up data retrieval"
+          },
+          {
+            question: "What is a primary key?",
+            options: ["A unique identifier for a record", "A foreign key", "A secondary key", "A composite key"],
+            answer: "A unique identifier for a record"
+          },
+          {
+            question: "What is a foreign key?",
+            options: ["A key that references another table", "A primary key", "A secondary key", "A composite key"],
+            answer: "A key that references another table"
+          },
+          {
+            question: "What is denormalization?",
+            options: ["Adding redundant data to improve performance", "Removing redundant data", "Normalizing data", "Encrypting data"],
+            answer: "Adding redundant data to improve performance"
+          },
+          {
+            question: "What is the difference between SQL and NoSQL?",
+            options: ["SQL is relational, NoSQL is not", "NoSQL is relational, SQL is not", "SQL is newer than NoSQL", "NoSQL is newer than SQL"],
+            answer: "SQL is relational, NoSQL is not"
+          },
+          {
+            question: "What is a transaction?",
+            options: ["A sequence of operations treated as a single unit", "A single database query", "A database backup", "A database restore"],
+            answer: "A sequence of operations treated as a single unit"
+          }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+
+        const questionEl = document.getElementById('question');
+        const optionsEl = document.getElementById('options');
+        const resultEl = document.getElementById('result');
+
+        function loadQuestion() {
+            const question = questions[currentQuestion];
+            questionEl.innerText = question.question;
+
+            optionsEl.innerHTML = '';
+            question.options.forEach((option, index) => {
+                const li = document.createElement('li');
+                const button = document.createElement('a');
+                button.classList.add('option-button');
+                button.innerText = option;
+                button.href = '#';
+                button.addEventListener('click', () => checkAnswer(option));
+                li.appendChild(button);
+                optionsEl.appendChild(li);
+            });
+        }
+
+        function checkAnswer(answer) {
+            if (answer === questions[currentQuestion].answer) {
+                score++;
+            }
+
+            currentQuestion++;
+
+            if (currentQuestion < questions.length) {
+                loadQuestion();
+            } else {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            quizEl = document.getElementById('quiz');
+            quizEl.innerHTML = `<h2>You scored ${score} out of ${questions.length}!</h2>`;
+        }
+
+        loadQuestion();
+    </script>
+</body>
+</html>

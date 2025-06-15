@@ -6,6 +6,8 @@ from functions.get_files_info import get_files_info, schema_get_files_info
 from functions.get_file_content import get_file_content, schema_get_file_content
 from functions.write_file import write_file, schema_write_file
 from functions.run_python_file import run_python_file, schema_run_python_file
+from functions.make_dir import make_dir, schema_make_dir
+from functions.fetch_content import fetch_content, schema_fetch_content
 
 WORKING_DIRECTORY = "./calculator"
 
@@ -14,6 +16,8 @@ ALLOWED_FUNCTIONS: Dict[str, Callable[..., str]] = {
     "get_file_content": get_file_content,
     "write_file": write_file,
     "run_python_file": run_python_file,
+    "make_dir": make_dir,
+    "fetch_content": fetch_content,
 }
 
 available_functions = types.Tool(
@@ -22,6 +26,8 @@ available_functions = types.Tool(
         schema_get_file_content,
         schema_run_python_file,
         schema_write_file,
+        schema_make_dir,
+        schema_fetch_content,
     ]
 )
 
@@ -30,9 +36,7 @@ def call_function(
     function_call_part: types.FunctionCall, verbose: bool = False
 ) -> types.Content:
     if verbose:
-        print(
-            f"Calling function: {function_call_part.name}({function_call_part.args})"
-        )
+        print(f"Calling function: {function_call_part.name}({function_call_part.args})")
     else:
         print(f" - Calling function: {function_call_part.name}")
 

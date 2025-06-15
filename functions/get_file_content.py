@@ -4,12 +4,11 @@ from google.genai import types
 
 MAX_CHARS = 10000
 
+
 def get_file_content(working_directory: str, file_path: str) -> str:
     try:
         working_abspath = os.path.abspath(working_directory)
-        file_abspath = os.path.abspath(
-            os.path.join(working_abspath, file_path)
-        )
+        file_abspath = os.path.abspath(os.path.join(working_abspath, file_path))
 
         if not file_abspath.startswith(working_abspath):
             return f'Error: Cannot read "{file_path}" as it is outside the permitted working directory'

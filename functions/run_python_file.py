@@ -12,9 +12,7 @@ def run_python_file(
 ) -> str:
     try:
         working_abspath = os.path.abspath(working_directory)
-        file_abspath = os.path.abspath(
-            os.path.join(working_abspath, file_path)
-        )
+        file_abspath = os.path.abspath(os.path.join(working_abspath, file_path))
 
         if not file_abspath.startswith(working_abspath):
             return f'Error: Cannot execute "{file_path}" as it is outside the permitted working directory'
