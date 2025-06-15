@@ -88,7 +88,7 @@ def do_interaction_with_ai(
                 messages, is_verbose, iter_number + 1, max_iteration
             )
 
-        return get_response_text(response)
+    return get_response_text(response)
 
 
 def main():
